@@ -1,14 +1,14 @@
-import * as O from 'fp-ts/Option';
+import {
+  TimeoutId,
+} from '../type';
 
-type TimeoutId = ReturnType<typeof setTimeout>
-
-const ClockStatus = {
+export const ClockStatus = {
   Reached: 'reached',
   Canceled: 'canceled',
   Idle: 'idle',
 } as const;
 
-type ClockStatus = typeof ClockStatus[keyof typeof ClockStatus]
+export type ClockStatus = typeof ClockStatus[keyof typeof ClockStatus]
 
 interface ClockJob {
   timeoutId: TimeoutId
@@ -18,11 +18,11 @@ interface ClockJob {
 
 export class Clock {
   private _duration: number;
-  private _clockJob: O.Option<ClockJob>;
+  private _clockJob: ClockJob | undefined;
 
   constructor(duration: number) {
     this._duration = duration;
-    this._clockJob = O.none;
+    this._clockJob = undefined;
   }
 
   init() {
@@ -32,37 +32,39 @@ export class Clock {
     const promise = new Promise<ClockStatus>((res, _) => { resolve = res; });
     const timeoutId = setTimeout(
       () => {
-        if (O.isSome(this._clockJob)) {
-          this._clockJob.value.resolve(ClockStatus.Reached);
-          this._clockJob = O.none;
+        if (this._clockJob) {
+          this._clockJob.resolve(ClockStatus.Reached);
+          this._clockJob = undefined;
         }
       },
       this._duration,
     );
 
-    this._clockJob = O.some(
-      {
-        timeoutId,
-        promise,
-        resolve,
-      }
-    );
+    this._clockJob = {
+      timeoutId,
+      promise,
+      resolve,
+    };
   }
 
   cancel() {
-    if (O.isSome(this._clockJob)) {
-      clearTimeout(this._clockJob.value.timeoutId);
-      this._clockJob.value.resolve(ClockStatus.Canceled);
-      this._clockJob = O.none;
+    if (this._clockJob) {
+      clearTimeout(this._clockJob.timeoutId);
+      this._clockJob.resolve(ClockStatus.Canceled);
+      this._clockJob = undefined;
     }
   }
 
   wait() {
-    if (O.isSome(this._clockJob)) {
-      return this._clockJob.value.promise;
+    if (this._clockJob) {
+      return this._clockJob.promise;
     }
     else {
       return Promise.resolve(ClockStatus.Idle);
     }
+  }
+
+  isWaiting() {
+    return this._clockJob !== undefined;
   }
 }

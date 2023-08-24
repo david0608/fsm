@@ -8,7 +8,7 @@ import {
 export type StateFn<C> =
   (context: C) => Promise<void>
 
-interface StateOptions<C> {
+export interface StateOptions<C> {
   preStateFn: StateFn<C>,
   stateFn: StateFn<C>,
   postStateFn: StateFn<C>,

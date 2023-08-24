@@ -6,13 +6,12 @@ module.exports = [
   {
     files: [
       'src/**/*.ts',
-      'test/**/*.ts',
       'example/**/*.ts'
     ],
     languageOptions: {
       parser: tsParser,
       parserOptions: {
-        project: './tsconfig-eslint.json',
+        project: './tsconfig.json',
       },
     },
     plugins: {

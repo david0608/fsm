@@ -11,9 +11,13 @@ export declare class Transition<C> {
     private _transitionFn;
     private _state;
     constructor(options?: Partial<TransitionOptions<C>>);
+    conditionFn(): ConditionFn<C>;
     check(context: Immutable<C>): boolean;
+    transitionFn(): TransitionFn<C>;
     transition(context: C): void;
     state(): State<C>;
     setState(state: State<C>): void;
 }
+export declare const conditionFnDefaultTrue: ConditionFn<any>;
+export declare const transitionFnDefaultNull: TransitionFn<any>;
 export {};

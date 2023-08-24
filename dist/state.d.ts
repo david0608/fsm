@@ -1,6 +1,6 @@
 import { Transition } from './transition';
 export type StateFn<C> = (context: C) => Promise<void>;
-interface StateOptions<C> {
+export interface StateOptions<C> {
     preStateFn: StateFn<C>;
     stateFn: StateFn<C>;
     postStateFn: StateFn<C>;
@@ -23,4 +23,3 @@ export declare class SleepState extends State<any> {
 }
 export declare const stateFnDefaultNull: StateFn<any>;
 export declare const stateFnDefaultHalt: StateFn<any>;
-export {};

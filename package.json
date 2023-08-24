@@ -1,15 +1,15 @@
 {
   "name": "fsm",
   "version": "0.0.1",
-  "description": "TypeScript implementation of FSM core.",
+  "description": "A TypeScript implementation of finite-state machine core.",
   "main": "dist/index.js",
   "scripts": {
     "clean": "rm -rf dist",
     "clean-example": "rm -rf dist-example",
-    "lint": "eslint src test",
+    "lint": "eslint src",
     "lint-example": "eslint example",
     "test": "jest --config jest.config.js",
-    "build": "npm run clean && npm run lint && npm run test && tsc -p tsconfig.json",
+    "build": "npm run clean && npm run lint && npm run test && tsc -p tsconfig-src.json",
     "build-example": "npm run clean-example && npm run lint-example && tsc -p tsconfig-example.json",
     "build-all": "npm run build && npm run build-example"
   },
@@ -24,11 +24,7 @@
     "@typescript-eslint/parser": "^6.4.0",
     "eslint": "^8.47.0",
     "eslint-plugin-total-functions": "^7.0.7",
-    "fp-ts": "^2.16.1",
     "ts-jest": "^29.1.1",
     "typescript": "^5.1.6"
-  },
-  "peerDependencies": {
-    "fp-ts": "^2.16.1"
   }
 }

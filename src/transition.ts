@@ -23,8 +23,16 @@ export class Transition<C> {
     this._state = new State();
   }
 
+  conditionFn() {
+    return this._conditionFn;
+  }
+
   check(context: Immutable<C>) {
     return this._conditionFn(context);
+  }
+
+  transitionFn() {
+    return this._transitionFn;
   }
 
   transition(context: C) {
@@ -40,8 +48,8 @@ export class Transition<C> {
   }
 }
 
-const conditionFnDefaultTrue: ConditionFn<any> =
+export const conditionFnDefaultTrue: ConditionFn<any> =
   (_) => true;
 
-const transitionFnDefaultNull: TransitionFn<any> =
+export const transitionFnDefaultNull: TransitionFn<any> =
   (_) => {};
