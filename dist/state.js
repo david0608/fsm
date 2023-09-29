@@ -35,7 +35,7 @@ class SleepState extends State {
     }
 }
 exports.SleepState = SleepState;
-const stateFnDefaultNull = (_) => (0, utils_1.sleep)(0);
+const stateFnDefaultNull = (_) => Promise.resolve();
 exports.stateFnDefaultNull = stateFnDefaultNull;
 const stateFnDefaultHalt = (_) => new Promise(() => { });
 exports.stateFnDefaultHalt = stateFnDefaultHalt;

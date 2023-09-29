@@ -1,5 +1,12 @@
-import { asImmutable } from './type';
-import { State } from './state';
+import {
+  asImmutable
+} from './type';
+import {
+  State
+} from './state';
+import {
+  sleep,
+} from './utils';
 
 export class Manager<C> {
   private _context: C;
@@ -42,6 +49,7 @@ export class Manager<C> {
     await this._currentState.preStateFn()(this.context());
     while (true) {
       await this.forth();
+      await sleep(0);
     }
   }
 }

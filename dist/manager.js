@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Manager = void 0;
 const type_1 = require("./type");
+const utils_1 = require("./utils");
 class Manager {
     constructor(createContext, initialState) {
         this._context = createContext();
@@ -43,6 +44,7 @@ class Manager {
             yield this._currentState.preStateFn()(this.context());
             while (true) {
                 yield this.forth();
+                yield (0, utils_1.sleep)(0);
             }
         });
     }

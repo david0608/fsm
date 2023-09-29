@@ -62,7 +62,7 @@ export class SleepState extends State<any> {
 }
 
 export const stateFnDefaultNull: StateFn<any> =
-  (_) => sleep(0);
+  (_) => Promise.resolve();
 
 export const stateFnDefaultHalt: StateFn<any> =
   (_) => new Promise(() => {});
