@@ -10,7 +10,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Manager = void 0;
-const type_1 = require("./type");
 const utils_1 = require("./utils");
 class Manager {
     constructor(createContext, initialState) {
@@ -25,7 +24,7 @@ class Manager {
         return __awaiter(this, void 0, void 0, function* () {
             yield this._currentState.stateFn()(this._context);
             for (const transition of this._currentState.transitions()) {
-                if (transition.check((0, type_1.asImmutable)(this._context))) {
+                if (transition.check(this._context)) {
                     yield this._currentState.postStateFn()(this.context());
                     transition.transition(this._context);
                     this._currentState = transition.state();

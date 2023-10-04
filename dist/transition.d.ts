@@ -1,6 +1,5 @@
-import { Immutable } from './type';
 import { State } from './state';
-export type ConditionFn<C> = (context: Immutable<C>) => boolean;
+export type ConditionFn<C> = (context: C) => boolean;
 export type TransitionFn<C> = (context: C) => void;
 interface TransitionOptions<C> {
     conditionFn: ConditionFn<C>;
@@ -12,7 +11,7 @@ export declare class Transition<C> {
     private _state;
     constructor(options?: Partial<TransitionOptions<C>>);
     conditionFn(): ConditionFn<C>;
-    check(context: Immutable<C>): boolean;
+    check(context: C): boolean;
     transitionFn(): TransitionFn<C>;
     transition(context: C): void;
     state(): State<C>;

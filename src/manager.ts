@@ -1,7 +1,4 @@
 import {
-  asImmutable
-} from './type';
-import {
   State
 } from './state';
 import {
@@ -31,7 +28,7 @@ export class Manager<C> {
     await this._currentState.stateFn()(this._context);
 
     for (const transition of this._currentState.transitions()) {
-      if (transition.check(asImmutable(this._context))) {
+      if (transition.check(this._context)) {
         await this._currentState.postStateFn()(this.context());
         transition.transition(this._context);
         this._currentState = transition.state();

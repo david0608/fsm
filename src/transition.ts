@@ -1,8 +1,7 @@
-import { Immutable } from './type';
 import { State } from './state';
 
 export type ConditionFn<C> =
-  (context: Immutable<C>) => boolean
+  (context: C) => boolean
 
 export type TransitionFn<C> =
   (context: C) => void
@@ -27,7 +26,7 @@ export class Transition<C> {
     return this._conditionFn;
   }
 
-  check(context: Immutable<C>) {
+  check(context: C) {
     return this._conditionFn(context);
   }
 

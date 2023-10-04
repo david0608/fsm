@@ -12,9 +12,6 @@ import {
   conditionFnDefaultTrue,
   transitionFnDefaultNull,
 } from './transition';
-import {
-  Immutable,
-} from './type';
 
 describe('module transition', () => {
 
@@ -122,7 +119,7 @@ describe('module transition', () => {
 
       it('Should accept expected type as parameters.', () => {
         const t = new Transition<Context>();
-        type E = [context: Immutable<Context>]
+        type E = [context: Context]
         type A = Parameters<typeof t.check>
         assertBothExtends<E, A, E>();
       });
